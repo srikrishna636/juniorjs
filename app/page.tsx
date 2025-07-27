@@ -1,5 +1,8 @@
-'use client';
-import { motion } from 'framer-motion'; // Import for animations
+'use client'; // Keep this for client-side rendering
+
+import { motion } from 'framer-motion';
+import { Input } from '@/components/ui/input'; // Shadcn Input
+import { Search, User, Rocket, Building2, Palette, Atom } from 'lucide-react'; // Lucide icons
 
 export default function Home() {
   return (
@@ -11,13 +14,19 @@ export default function Home() {
         animate={{ y: 0 }}
         transition={{ duration: 0.5, ease: 'easeOut' }}
       >
-        <a href="/" className="text-xl font-bold flex items-center">JuniorJS 🚀</a>
-        <input 
-          type="text" 
-          placeholder="Search topics... 🔍" 
-          className="bg-white/10 rounded-full px-4 py-2 text-white placeholder-white/50 focus:outline-none"
-        />
-        <a href="/profile" className="hover:text-purple-300">Profile 👤</a>
+        <a href="/" className="text-xl font-bold flex items-center">
+          JuniorJS <Rocket className="ml-2 h-5 w-5 text-pink-500" />
+        </a>
+        <div className="relative">
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-white/50" />
+          <Input 
+            placeholder="Search topics..." 
+            className="pl-10 bg-white/10 border-none text-white placeholder-white/50 rounded-full focus-visible:ring-0"
+          />
+        </div>
+        <a href="/profile" className="flex items-center hover:text-purple-300">
+          <User className="mr-1 h-5 w-5" /> Profile
+        </a>
       </motion.nav>
 
       {/* Hero Section with Large Typography and Emoji */}
@@ -37,14 +46,19 @@ export default function Home() {
       <section className="py-16 px-4">
         <h2 className="text-4xl font-bold text-center mb-8">Featured Topics 📚</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-          {['HTML Basics 🏗️', 'CSS Flexbox 🎨', 'React Hooks ⚛️'].map((topic, index) => (
+          {[
+            { title: 'HTML Basics', icon: Building2, emoji: '🏗️' },
+            { title: 'CSS Flexbox', icon: Palette, emoji: '🎨' },
+            { title: 'React Hooks', icon: Atom, emoji: '⚛️' }
+          ].map((topic, index) => (
             <motion.div 
               key={index}
-              className="bg-white/10 backdrop-blur-md rounded-xl p-6 shadow-xl hover:shadow-2xl cursor-pointer"
+              className="bg-white/10 backdrop-blur-md rounded-xl p-6 shadow-xl hover:shadow-2xl cursor-pointer flex flex-col items-start"
               whileHover={{ scale: 1.05, rotate: 2 }}
               transition={{ duration: 0.3 }}
             >
-              <h3 className="text-2xl font-semibold mb-2">{topic}</h3>
+              <topic.icon className="h-8 w-8 text-yellow-400 mb-2" />
+              <h3 className="text-2xl font-semibold mb-2">{topic.title} {topic.emoji}</h3>
               <p>Start learning with fun analogies! 🚀</p>
             </motion.div>
           ))}
