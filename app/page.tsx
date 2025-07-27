@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { Input } from '@/components/ui/input'; // Shadcn Input
 import { Search, User, Rocket, Building2, Palette, Atom } from 'lucide-react'; // Lucide icons
+import Link from 'next/link';
 
 export default function Home() {
   return (
@@ -47,20 +48,21 @@ export default function Home() {
         <h2 className="text-4xl font-bold text-center mb-8">Featured Topics 📚</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
           {[
-            { title: 'HTML Basics', icon: Building2, emoji: '🏗️' },
-            { title: 'CSS Flexbox', icon: Palette, emoji: '🎨' },
-            { title: 'React Hooks', icon: Atom, emoji: '⚛️' }
+            { title: 'HTML Basics', icon: Building2, emoji: '🏗️', slug: 'html-basics' },
+            { title: 'CSS Flexbox', icon: Palette, emoji: '🎨', slug: 'css-flexbox' },
+            { title: 'React Hooks', icon: Atom, emoji: '⚛️', slug: 'react-hooks' }
           ].map((topic, index) => (
-            <motion.div 
-              key={index}
-              className="bg-white/10 backdrop-blur-md rounded-xl p-6 shadow-xl hover:shadow-2xl cursor-pointer flex flex-col items-start"
-              whileHover={{ scale: 1.05, rotate: 2 }}
-              transition={{ duration: 0.3 }}
-            >
-              <topic.icon className="h-8 w-8 text-yellow-400 mb-2" />
-              <h3 className="text-2xl font-semibold mb-2">{topic.title} {topic.emoji}</h3>
-              <p>Start learning with fun analogies! 🚀</p>
-            </motion.div>
+            <Link href={`/${topic.slug}`} key={index}>
+              <motion.div 
+                className="bg-white/10 backdrop-blur-md rounded-xl p-6 shadow-xl hover:shadow-2xl cursor-pointer flex flex-col items-start"
+                whileHover={{ scale: 1.05, rotate: 2 }}
+                transition={{ duration: 0.3 }}
+              >
+                <topic.icon className="h-8 w-8 text-yellow-400 mb-2" />
+                <h3 className="text-2xl font-semibold mb-2">{topic.title} {topic.emoji}</h3>
+                <p>Start learning with fun analogies! 🚀</p>
+              </motion.div>
+            </Link>
           ))}
         </div>
       </section>
